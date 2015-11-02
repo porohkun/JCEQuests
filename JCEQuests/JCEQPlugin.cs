@@ -17,7 +17,7 @@ namespace JCEQuests
         public IEnumerable<ToolStripMenuItem> GetMenuItems()
         {
             ToolStripMenuItem item2 = new ToolStripMenuItem("Отладка") { Tag = "{\"enabled\":\"True\"}" };
-            //item2.Click += BuildCards;
+            item2.Click += RunQuest;
             yield return item2;
         }
 
@@ -37,7 +37,11 @@ namespace JCEQuests
             return null;
         }
 
-        //private void BuildCards(object sender, EventArgs e)
+        private void RunQuest(object sender, EventArgs e)
+        {
+            RunQuestForm form = new RunQuestForm();
+            form.Show(MainForm.Instance);
+        }
         //{
         //    bool edited = false;
         //    foreach (ISaveableForm frm in MainForm.Instance.MdiChildren)

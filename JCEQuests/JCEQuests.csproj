@@ -48,6 +48,18 @@
     <Compile Include="QuestEditorForm.Designer.cs">
       <DependentUpon>QuestEditorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Quests\ChoiceAction.cs" />
+    <Compile Include="Quests\Conditions\Condition.cs" />
+    <Compile Include="Quests\Quest.cs" />
+    <Compile Include="Quests\QuestException.cs" />
+    <Compile Include="Quests\QuestScene.cs" />
+    <Compile Include="Quests\SceneChoice.cs" />
+    <Compile Include="RunQuestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RunQuestForm.Designer.cs">
+      <DependentUpon>RunQuestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="JCEQPlugin.cs" />
   </ItemGroup>
@@ -64,6 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="QuestEditorForm.resx">
       <DependentUpon>QuestEditorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RunQuestForm.resx">
+      <DependentUpon>RunQuestForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

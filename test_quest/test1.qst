@@ -1,1 +1,25 @@
-ghggj
+[
+    {
+        "name": "scene1",
+        "text": "bla bla bla eto scena 1.",
+        "choices": {
+            "choice1": {
+                "text": "wybor1: go to scene2",
+                "actions": [
+                    {
+                        "condition": "",
+                        "marks": {
+                            "mark1": true,
+                            "mark2": false
+                        },
+                        "items": {
+                            "item1": 1,
+                            "item2": -1
+                        },
+                        "scene": "scene2"
+                    }
+                ]
+            }
+        }
+    }
+]
