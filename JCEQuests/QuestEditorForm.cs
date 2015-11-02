@@ -40,7 +40,6 @@ namespace JCEQuests
         public bool CanRedo { get; private set; }
         public bool WasOpen { get; private set; }
         public void Save() { }
-        public void Close() { }
 
         #endregion
 
@@ -48,6 +47,7 @@ namespace JCEQuests
         {
             textBox1.Text = filename;
             File = new FilePath(filename);
+            WasOpen = true;
         }
 
         public QuestEditorForm()
