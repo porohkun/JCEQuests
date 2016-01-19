@@ -8,14 +8,21 @@ namespace JCEQuests.Quests
 {
     public class SceneChoice
     {
+        private Condition _condition;
         public string Text { get; private set; }
         private List<ChoiceAction> _actions = new List<ChoiceAction>();
 
         public SceneChoice(JSONValue json)
         {
-            Text = json["text"];
+            _condition = Condition.Create(json["condition"]);
+            Text = Quest.FormatTextFromJson(json["text"]);
             foreach (var action in json["actions"].Array)
                 _actions.Add(new ChoiceAction(action));
+        }
+
+        internal bool Check(Quest quest)
+        {
+            return _condition.Check(quest);
         }
 
         internal ChoiceAction GetAction(Quest quest)

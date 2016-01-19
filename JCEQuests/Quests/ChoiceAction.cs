@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using PNetJson;
-using JCEQuests.Quests.Conditions;
 
 namespace JCEQuests.Quests
 {
@@ -17,7 +16,7 @@ namespace JCEQuests.Quests
         public ChoiceAction(JSONValue json)
         {
             _condition = Condition.Create(json["condition"]);
-            if (json.Obj.ContainsKey("condition"))
+            if (json.Obj.ContainsKey("marks"))
                 foreach (var mark in json["marks"].Obj)
                     _marks.Add(mark.Key, mark.Value);
             if (json.Obj.ContainsKey("items"))

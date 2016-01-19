@@ -16,9 +16,15 @@ namespace JCEQuests.Quests
         public QuestScene(JSONValue json)
         {
             Name = json["name"];
-            Text = json["text"];
+            Text = Quest.FormatTextFromJson(json["text"]);
             foreach (var choice in json["choices"].Obj)
                 _choices.Add(choice.Key, new SceneChoice(choice.Value));
+        }
+
+        internal IEnumerable<KeyValuePair<string, SceneChoice>> GetChoices()
+        {
+            foreach (var choice in _choices)
+                yield return choice;
         }
 
         internal SceneChoice GetChoice(string name)

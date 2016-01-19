@@ -1,0 +1,40 @@
+[
+    {
+        "name": "room_1_0_0",
+        "text": "Шагая по коридору ты замечаешь боковое ответвление. Ты можешь пойти на юг, запад и восток.",
+        "choices": {
+            "go_south": {
+                "text": "Идти на юг",
+                "actions": [
+                    {
+                        "condition": "room_1_1_wall_broken",
+                        "scene": "room_1_1_2"
+                    },
+                    {
+                        "condition": "room_1_1_visited",
+                        "scene": "room_1_1_1"
+                    },
+                    {
+                        "scene": "room_1_1_0"
+                    }
+                ]
+            },
+            "go_west": {
+                "text": "Идти на запад",
+                "actions": [
+                    {
+                        "scene": "room_0_0_0"
+                    }
+                ]
+            },
+            "go_east": {
+                "text": "Идти на восток",
+                "actions": [
+                    {
+                        "scene": "room_2_0_0"
+                    }
+                ]
+            }
+        }
+    }
+]
