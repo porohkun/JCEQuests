@@ -31,13 +31,14 @@
             this.sceneTextBox = new System.Windows.Forms.TextBox();
             this.sceneNameBox = new System.Windows.Forms.TextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.ChoicesList = new System.Windows.Forms.ListBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.marksList = new System.Windows.Forms.ListBox();
             this.itemsTree = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.choicesGrid = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -50,6 +51,7 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.choicesGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // sceneTextBox
@@ -95,18 +97,6 @@
             this.splitContainer1.SplitterDistance = 375;
             this.splitContainer1.TabIndex = 2;
             // 
-            // ChoicesList
-            // 
-            this.ChoicesList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ChoicesList.FormattingEnabled = true;
-            this.ChoicesList.IntegralHeight = false;
-            this.ChoicesList.Location = new System.Drawing.Point(3, 3);
-            this.ChoicesList.Name = "ChoicesList";
-            this.ChoicesList.Size = new System.Drawing.Size(369, 243);
-            this.ChoicesList.TabIndex = 2;
-            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -121,7 +111,7 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.ChoicesList);
+            this.splitContainer2.Panel2.Controls.Add(this.choicesGrid);
             this.splitContainer2.Size = new System.Drawing.Size(375, 500);
             this.splitContainer2.SplitterDistance = 247;
             this.splitContainer2.TabIndex = 0;
@@ -186,6 +176,38 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Предметы в инвентарях";
             // 
+            // choicesGrid
+            // 
+            this.choicesGrid.AllowUserToAddRows = false;
+            this.choicesGrid.AllowUserToDeleteRows = false;
+            this.choicesGrid.AllowUserToResizeColumns = false;
+            this.choicesGrid.AllowUserToResizeRows = false;
+            this.choicesGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.choicesGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.choicesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.choicesGrid.ColumnHeadersVisible = false;
+            this.choicesGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1});
+            this.choicesGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.choicesGrid.Location = new System.Drawing.Point(3, 3);
+            this.choicesGrid.MultiSelect = false;
+            this.choicesGrid.Name = "choicesGrid";
+            this.choicesGrid.ReadOnly = true;
+            this.choicesGrid.RowHeadersVisible = false;
+            this.choicesGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.choicesGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.choicesGrid.Size = new System.Drawing.Size(369, 243);
+            this.choicesGrid.TabIndex = 0;
+            this.choicesGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.choicesGrid_CellContentClick);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            // 
             // RunQuestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,6 +231,7 @@
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.choicesGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -219,11 +242,12 @@
         private System.Windows.Forms.TextBox sceneNameBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListBox ChoicesList;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox marksList;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TreeView itemsTree;
+        private System.Windows.Forms.DataGridView choicesGrid;
+        private System.Windows.Forms.DataGridViewButtonColumn Column1;
     }
 }

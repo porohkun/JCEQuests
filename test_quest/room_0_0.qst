@@ -1,0 +1,85 @@
+[
+    {
+        "name": "start",
+        "text": "Ты очнулся на холодном каменном полу. Это место похоже на какое-то подземелье.",
+        "position": "100:100",
+        "choices": {
+            "look_around": {
+                "text": "Осмотреться вокруг",
+                "actions": [
+                    {
+                        "condition": "true",
+                        "marks": {
+                            "time_morning": true
+                        },
+                        "items": {
+                            "user.compass": 1
+                        },
+                        "scene": "room_0_0_0"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "room_0_0_0",
+        "text": "Это каменная комната с низким потолком и одной дверю, ведущей на восток.\r\n\r\nВ комнате сыро, а в углу насыпана куча мусора.",
+        "choices": {
+            "trash_find": {
+                "condition": "!trash_empty",
+                "text": "Копаться в мусоре",
+                "actions": [
+                    {
+                        "condition": "user.pick==0",
+                        "scene": "room_0_0_pick"
+                    },
+                    {
+                        "scene": "room_0_0_empty"
+                    }
+                ]
+            },
+            "go_east": {
+                "text": "Идти на восток",
+                "actions": [
+                    {
+                        "scene": "room_1_0_0"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "room_0_0_pick",
+        "text": "Изрядно повозившись в горе мусора ты нашел старую ржавую кирку.",
+        "choices": {
+            "pick_up": {
+                "text": "Взять с собой, может пригодиться.",
+                "actions": [
+                    {
+                        "items": {
+                            "user.pick": 1
+                        },
+                        "scene": "room_0_0_0"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "name": "room_0_0_empty",
+        "text": "Переворошив всю кучу еще раз ты понимаешь, что ничего полезного там больше нет.",
+        "choices": {
+            "clear": {
+                "text": "Отряхнуться.",
+                "actions": [
+                    {
+                        "marks": {
+                            "trash_empty": true
+                        },
+                        "scene": "room_0_0_0"
+                    }
+                ]
+            }
+        }
+    }
+]

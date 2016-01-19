@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using PNetJson;
 using JsonConfigEditor;
 using JsonConfigEditor.Plugins;
+using JCEQuests.Quests;
 
 namespace JCEQuests
 {
@@ -39,40 +40,17 @@ namespace JCEQuests
 
         private void RunQuest(object sender, EventArgs e)
         {
-            RunQuestForm form = new RunQuestForm();
-            form.Show(MainForm.Instance);
-        }
-        //{
-        //    bool edited = false;
-        //    foreach (ISaveableForm frm in MainForm.Instance.MdiChildren)
-        //    {
-        //        if (frm.Edited)
-        //        {
-        //            edited = true;
-        //            break;
-        //        }
-        //    }
-        //    if (edited)
-        //        if (MessageBox.Show("Для сборки карт все открытые файлы должны быть сохранены. Сохранить открытые файлы?",
-        //            "Сборка карт", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
-        //        {
-        //            MainForm.Instance.SaveAllFiles(this, new EventArgs());
-        //            edited = false;
-        //        }
-        //    if (!edited)
-        //    {
-        //        BuildCardsForm f2 = new BuildCardsForm();
-        //        f2.ShowDialog(MainForm.Instance);
-        //    }
-        //}
+            var scenes = new List<QuestScene>();
 
-        //private void SetsEdit(object sender, EventArgs e)
-        //{
-        //    MainForm.Instance.MakeNewChildForm(typeof(SetsEditForm), "Правка сетов");
-        //    //SetsEditForm sef = new SetsEditForm(toolStrip1, "Правка сетов");
-        //    //sef.MdiParent = this;
-        //    //sef.Show();
-        //}
+            foreach (var file in Directory.GetFiles(Car.Glob.Set.WS.ConfigJsonPath, "*.qst", SearchOption.AllDirectories))
+                foreach (var json in JSONValue.Load(file).Array)
+                    scenes.Add(new QuestScene(json));
+            string startScene = "start";//scenes[0].Name;
+            Quest quest = new Quest(scenes, startScene);
+
+            RunQuestForm form = new RunQuestForm(quest);
+            form.Show();
+        }
 
         public ISettings GetEmptySettings()
         {

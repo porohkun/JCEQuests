@@ -29,6 +29,64 @@ namespace JCEQuests.Quests
                 throw new QuestException(string.Format("Сцена '{0}' не существует.", scene));
         }
 
+        private void AddMark(string mark)
+        {
+            if (!_marks.Contains(mark))
+                _marks.Add(mark);
+        }
+
+        private void RemoveMark(string mark)
+        {
+            if (_marks.Contains(mark))
+                _marks.Remove(mark);
+        }
+
+        private void AddItem(string inventory, string item, int count)
+        {
+            if (!_inventories.ContainsKey(inventory))
+                _inventories.Add(inventory, new Dictionary<string, int>());
+            var inv = _inventories[inventory];
+            if (!inv.ContainsKey(item))
+                inv.Add(item, 0);
+            //if (inv[item] + count < 0)
+            //    throw new QuestException(string.Format("Предмет '{0}.{1}' не может быть меньше нуля ({2}{3}={4}).", inventory, item, inv[item], count, inv[item] + count));
+            inv[item] += count;
+            if (inv[item] == 0)
+                inv.Remove(item);
+        }
+
+        public IEnumerable<string> GetMarks()
+        {
+            return _marks.AsEnumerable<string>();
+        }
+
+        public bool InventoryExists(string inventory)
+        {
+            return _inventories.ContainsKey(inventory);
+        }
+
+        public int ItemCount(string inventory,string item)
+        {
+            if (InventoryExists(inventory))
+                if (_inventories[inventory].ContainsKey(item))
+                    return _inventories[inventory][item];
+            return 0;
+        }
+
+        public IEnumerable<QuestItem> GetItems()
+        {
+            foreach (var inv in _inventories)
+                foreach (var item in inv.Value)
+                    yield return new QuestItem(inv.Key, item.Key, item.Value);
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetActualChoices()
+        {
+            foreach (var choice in CurrentScene.GetChoices())
+                if (choice.Value.Check(this))
+                    yield return new KeyValuePair<string, string>(choice.Key, choice.Value.Text);
+        }
+
         public void SelectChoice(string name)
         {
             try
@@ -56,34 +114,32 @@ namespace JCEQuests.Quests
             }
             catch (QuestException e)
             {
-                throw new QuestException(string.Format("Не удалось сделать выбор '{0}' в сцене '{1}' по причине:- \r\n{2}", name, CurrentScene.Name, e.Message), e);
+                throw new QuestException(string.Format("Не удалось сделать выбор '{0}' в сцене '{1}' по причине:\r\n- {2}", name, CurrentScene.Name, e.Message), e);
             }
         }
 
-        private void AddMark(string mark)
+        public struct QuestItem
         {
-            if (!_marks.Contains(mark))
-                _marks.Add(mark);
+            public string Inventory;
+            public string Item;
+            public int Count;
+
+            public QuestItem(string inventory, string item, int count)
+            {
+                Inventory = inventory;
+                Item = item;
+                Count = count;
+            }
         }
 
-        private void RemoveMark(string mark)
+        internal static string FormatTextFromJson(string text)
         {
-            if (_marks.Contains(mark))
-                _marks.Remove(mark);
+            return text.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\t", "\t");
         }
 
-        private void AddItem(string inventory, string item, int count)
+        internal static string FormatTextToJson(string text)
         {
-            if (!_inventories.ContainsKey(inventory))
-                _inventories.Add(inventory, new Dictionary<string, int>());
-            var inv = _inventories[inventory];
-            if (!inv.ContainsKey(item))
-                inv.Add(item, 0);
-            if (inv[item] + count < 0)
-                throw new QuestException(string.Format("Предмет '{0}.{1}' не может быть меньше нуля ({2}{3}={4}).", inventory, item, inv[item], count, inv[item] + count));
-            inv[item] += count;
-            if (inv[item] == 0)
-                inv.Remove(item);
+            return text.Replace("\r", "\\r").Replace("\n", "\\n").Replace("\t", "\\t");
         }
 
     }

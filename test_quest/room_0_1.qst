@@ -1,0 +1,37 @@
+[
+    {
+        "name": "room_0_1_0",
+        "text": "Это каменная комната с низким потолком и дверьми, ведущими на восток и на юг. На стене висит потускневший от времени портрет. Когда ты вглядываешься в него, тебе кажется, что лицо на картине чем-то тебе знакомо.",
+        "choices": {
+            "go_south": {
+                "text": "Идти на юг",
+                "actions": [
+                    {
+                        "condition": "time_morning"
+                        "scene": "room_0_2_morning"
+                    },
+                    {
+                        "condition": "time_day"
+                        "scene": "room_0_2_day"
+                    },
+                    {
+                        "condition": "time_evening"
+                        "scene": "room_0_2_evening"
+                    },
+                    {
+                        "condition": "time_night"
+                        "scene": "room_0_2_night"
+                    }
+                ]
+            },
+            "go_east": {
+                "text": "Идти на восток",
+                "actions": [
+                    {
+                        "scene": "room_1_1_2"
+                    }
+                ]
+            }
+        }
+    }
+]
